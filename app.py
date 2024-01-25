@@ -1,7 +1,9 @@
 
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
+# import dash_core_components as dcc
+from dash import dcc
+# import dash_html_components as html
+from dash import html
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
 import data_processing as dp
@@ -83,7 +85,7 @@ incident_rate_perc_change_indicator = dcc.Graph(
             )
         ],
         'layout': go.Layout(
-            title = multiple_string_lines('2000-2014 Incidents Rate and % Change from 1980-1999', 10),
+            title = multiple_string_lines('2000-2014 Incidents Rate and % Change from 1985-1999', 10),
             height = 250
         )
     }
@@ -105,7 +107,7 @@ fatal_accidents_rate_perc_change_indicator = dcc.Graph(
             )
         ],
         'layout': go.Layout(
-            title = multiple_string_lines('2000-2014 Fatal Accidents Rate and % Change from 1980-1999', 10),
+            title = multiple_string_lines('2000-2014 Fatal Accidents Rate and % Change from 1985-1999', 10),
             height = 250
         )
     }
@@ -127,7 +129,7 @@ period_total_perc_stacked_bar_graph = dcc.Graph( \
             go.Bar(
                 x = period_total_perc['period']
                 , y = period_total_perc['fatal_accidents']
-                , text = period_total_perc['display_fatal_accidents'] 
+                , text = period_total_perc['display_fatal_accidents']
                 , textposition = 'auto'
                 , name = 'Fatal Accidents'
                 , marker_color = other_colors[3]
@@ -156,7 +158,7 @@ period_accident_rate_bar_graph = dcc.Graph( \
                 x = period_mean.loc[period_mean.period == '1985-1999', 'period'],
                 y = period_mean.loc[period_mean.period == '1985-1999', 'incident_rate'],
                 text= "{:.2f}".format(period_mean.loc[period_mean.period == '1985-1999', 'incident_rate'].max()),
-                textposition='auto',                
+                textposition='auto',
                 name = '1985-1999',
                 marker_color = period_colors['1985-1999'],
                 showlegend = False
@@ -165,7 +167,7 @@ period_accident_rate_bar_graph = dcc.Graph( \
                 x = period_mean.loc[period_mean.period == '2000-2014', 'period'],
                 y = period_mean.loc[period_mean.period == '2000-2014', 'incident_rate'],
                 text= "{:.2f}".format(period_mean.loc[period_mean.period == '2000-2014', 'incident_rate'].max()),
-                textposition='auto',                    
+                textposition='auto',
                 name = '2000-2014',
                 marker_color = period_colors['2000-2014'],
                 showlegend = False
@@ -202,7 +204,7 @@ period_fatal_accidents_rate_bar_graph =   dcc.Graph( \
                 x = period_mean.loc[period_mean.period == '2000-2014', 'period'],
                 y = period_mean.loc[period_mean.period == '2000-2014', 'fatal_accidents_rate'],
                 text= "{:.2f}".format(period_mean.loc[period_mean.period == '2000-2014', 'fatal_accidents_rate'].max()),
-                textposition='auto',  
+                textposition='auto',
                 name = '2000-2014',
                 marker_color = period_colors['2000-2014'],
                 showlegend = False
@@ -390,7 +392,7 @@ def update_incident_rate_airline_comp_graphs(airline):
 def generate_incident_rate_airline_comp_graph(airline):
     comp = dp.get_comp_airline(airline)
     traces = []
-    traces.append(            
+    traces.append(
         go.Bar(
             x = df.loc[df['airline'] == airline, 'airline'],
             y = df.loc[df['airline'] == airline, 'incident_rate_85_99'],
@@ -413,12 +415,12 @@ def generate_incident_rate_airline_comp_graph(airline):
             offsetgroup = 1,
             name = '2000-2014',
             showlegend = True
-        )     
+        )
     )
-    
+
     for al in comp:
         # Add 85-99 data
-        traces.append(            
+        traces.append(
             go.Bar(
                 x = df.loc[df['airline'] == al, 'airline'],
                 y = df.loc[df['airline'] == al, 'incident_rate_85_99'],
@@ -439,9 +441,9 @@ def generate_incident_rate_airline_comp_graph(airline):
                 marker_color = period_colors['2000-2014'],
                 offsetgroup = 1,
                 showlegend = False
-            )     
+            )
         )
-    
+
     return traces
 
 airline_incident_rate_bar_graph = dcc.Graph(
@@ -481,7 +483,7 @@ def update_fatal_rate_airline_comp_graphs(airline):
 def generate_fatal_rate_airline_comp_graph(airline):
     comp = dp.get_comp_airline(airline)
     traces = []
-    traces.append(            
+    traces.append(
         go.Bar(
             x = df.loc[df['airline'] == airline, 'airline'],
             y = df.loc[df['airline'] == airline, 'fatal_accidents_rate_85_99'],
@@ -504,12 +506,12 @@ def generate_fatal_rate_airline_comp_graph(airline):
             offsetgroup = 1,
             name = '2000-2014',
             showlegend = True
-        )     
+        )
     )
-    
+
     for al in comp:
         # Add 85-99 data
-        traces.append(            
+        traces.append(
             go.Bar(
                 x = df.loc[df['airline'] == al, 'airline'],
                 y = df.loc[df['airline'] == al, 'incident_rate_85_99'],
@@ -530,9 +532,9 @@ def generate_fatal_rate_airline_comp_graph(airline):
                 marker_color = period_colors['2000-2014'],
                 offsetgroup = 1,
                 showlegend = False
-            )     
+            )
         )
-    
+
     return traces
 
 airline_fatal_accidents_rate_bar_graph = dcc.Graph(
@@ -565,11 +567,11 @@ for airline in list(df.airline.unique()):
 ####################
 app.layout = html.Div([
     navbar,
-    
+
     # Overall fatal accidents and incidents trends
     html.H1("General Trends Between Time Periods", className="section-title"),
     period_total_perc_stacked_bar_graph,
-    
+
     # Incident Rate & Fatal Accident Rate trends
     html.H1("Incident & Fatal Accident Rate Time Period Trends", className="section-title"),
     dbc.Row(
@@ -589,10 +591,10 @@ app.layout = html.Div([
     # Airline % change between time periods - cross tab
     html.H1("Airline Incident & Fatal Accidents Rate % Change Between Time Periods", className="section-title"),
     airline_incident_perc_change_table,
-    airline_fatal_perc_change_table,    
+    airline_fatal_perc_change_table,
 
     # Scatterplots & Corr indicator graphs
-    html.H1("Airline Incident & Fatal Accidents Rate Correlation Between Time Periods", className="section-title"), 
+    html.H1("Airline Incident & Fatal Accidents Rate Correlation Between Time Periods", className="section-title"),
     dbc.Container(html.P("There is low positive pearson correlation between fatal accidents rate & incidents rate between two periods (i.e. do airlines with bad fatal accidents rate in 1985-1999 continue to have bad fatal accidents rate in 2000-2014?)")),
     dbc.Row(
         [dbc.Col(fatal_rate_corr_indicator , lg = 3)]
@@ -607,7 +609,7 @@ app.layout = html.Div([
 
     # Airline Comparisons
     html.H1("Airline Comparisons", className="section-title"),
-    dbc.Container(html.P("Select an airline to compare incident rate and fatal accident rate against the chosen airline's three closest competitors in terms of Available Seats Kilometers (captures the total flight passenger cpacity of an ailrine in kilometers). ")),    
+    dbc.Container(html.P("Select an airline to compare incident rate and fatal accident rate against the chosen airline's three closest competitors in terms of Available Seats Kilometers (captures the total flight passenger capacity of an ailrine in kilometers). ")),
     dbc.Row(
         [
             dbc.Col(
