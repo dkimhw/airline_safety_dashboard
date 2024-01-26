@@ -7,6 +7,8 @@ The dashboard shows how the flight incidence rate has changed over time. Specifi
 - Fatal accidents since 1985-1999 are down 64%.
 - Fatal accidents rate across all airlines are down significantly.
 - General airline accident rates are down but for some airlines like Southwest Airlines - the general accident rates are up 700%.
+- There is only a modest correlation between the two periods (i.e. past flying records doesn't really correlate with future flying records)
+- Some airlines are extremely unsafe - i.e. Pakistan International Airlines
 
 ## Installation
 
