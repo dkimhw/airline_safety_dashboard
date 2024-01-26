@@ -1,11 +1,12 @@
 
 .header-title {
-  font-size: 2em;
+  font-size: 2rem;
+  margin-left: 0rem;
 }
 
 .logo {
   flex-grow: 0;
-  margin-right: .75em;
+  margin-left: 1rem;
 }
 
 .small-margin-left {
@@ -23,22 +24,22 @@
 @media only screen and (max-width: 768px) {
   .section-title {
     margin: 10px 0;
-    font-size: 1.5em;
+    font-size: 1.5rem;
   }
 
   .small-margin-left {
-    margin: 0 1em;
+    margin: 0 1rem;
     width: 50%;
   }
 
   .header-title {
-    font-size: 1.5em;
+    font-size: 1.5rem;
   }
 }
 
 @media only screen and (max-width: 900px) {
   .small-margin-left {
-    margin: 0 2em;
+    margin: 0 2rem;
     width: 100%;
   }
 }
